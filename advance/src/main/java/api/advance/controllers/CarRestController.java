@@ -2,10 +2,12 @@ package api.advance.controllers;
 
 import api.advance.models.CarModel;
 import api.advance.service.CarService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -52,5 +54,10 @@ public class CarRestController {
         }
     }
 
+    @GetMapping("/isValidToDrive")
+    public Boolean isValidToDrive(@RequestParam("licensePlate") String licensePlate,
+                                  @RequestParam("currentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime currentDate) {
+        return carService.isValidToDrive(licensePlate,currentDate);
+    }
 }
 
