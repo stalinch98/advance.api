@@ -10,5 +10,9 @@
         <module name="advance.advance.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="advance.advance.main~1" target="17" />
+      <module name="advance.advance.test~1" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
