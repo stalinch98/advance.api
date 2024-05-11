@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  mvc:
+    servlet:
+      mapping:
+        path: /api
+  data:
+    mongodb:
+      uri: "mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.amffdpp.mongodb.net/${MONGODB_DATABASE}"
+logging:
+  level:
+    org.springframework.data.mongodb.core: DEBUG
