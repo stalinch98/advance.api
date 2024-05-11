@@ -54,6 +54,7 @@ public class CarRestController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("/isValidToDrive")
     public Boolean isValidToDrive(@RequestParam("licensePlate") String licensePlate,
                                   @RequestParam("currentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime currentDate) {
