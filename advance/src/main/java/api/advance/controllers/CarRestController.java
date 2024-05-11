@@ -2,9 +2,9 @@ package api.advance.controllers;
 
 import api.advance.models.CarModel;
 import api.advance.service.CarService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +20,36 @@ public class CarRestController {
     @GetMapping
     public List<CarModel> getAllCars() {
         return carService.getAllCars();
+    }
+
+    @PostMapping
+    public ResponseEntity<CarModel> createCar(@RequestBody CarModel carModel) {
+        try {
+            CarModel savedCar = carService.saveCar(carModel);
+            return new ResponseEntity<>(savedCar, HttpStatus.CREATED);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteCarById(@PathVariable("id") String id) {
+        try {
+            carService.deleteCarById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CarModel> updateCarById(@PathVariable("id") String id, @RequestBody CarModel carModel) {
+        try {
+            CarModel updatedCar = carService.updateCarById(id, carModel);
+            return new ResponseEntity<>(updatedCar, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
